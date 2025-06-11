@@ -25,13 +25,45 @@
       align-items: center;
       justify-content: flex-start;
     }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2.5rem;
+      margin-bottom: 1.5rem;
+      gap: 1.1rem;
+    }
     .logo {
-      margin: 2.5rem 0 1.5rem 0;
       width: 110px;
+      height: 110px;
       filter: drop-shadow(0 6px 16px rgba(0,0,0,0.10));
       border-radius: 2rem;
       background: rgba(255,255,255,0.7);
       padding: 8px;
+      object-fit: contain;
+    }
+    .title-img {
+      height: 110px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 8px rgba(90,110,180,0.13));
+      border-radius: 1.7rem;
+      background: rgba(255,255,255,0.65);
+      padding: 10px 18px 10px 10px;
+    }
+    .feature-card-img {
+      display: block;
+      margin: 0 auto 1.4rem auto;
+      width: 95%;
+      max-width: 370px;
+      background: rgba(255,255,255,0.38);
+      box-shadow: 0 4px 24px 0 rgba(50,100,200,0.09);
+      border-radius: 1.7rem;
+      padding: 0.7rem;
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      border: 1.2px solid rgba(255,255,255,0.28);
+      object-fit: contain;
     }
     .glass-container {
       margin: 0 auto;
@@ -163,36 +195,48 @@
       vertical-align: middle;
       display: none;
     }
-    @media (max-width: 520px) {
-      .glass-container, #discountCard {
-        padding: 1.2rem 0.4rem 1.1rem 0.4rem;
+    @media (max-width: 600px) {
+      .header-row {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .logo, .title-img {
+        width: 85px !important;
+        height: 85px !important;
+        padding: 5px !important;
+      }
+      .title-img {
+        padding: 8px 10px 8px 8px !important;
+      }
+      .feature-card-img {
         max-width: 98vw;
         border-radius: 1.05rem;
-      }
-      .logo {
-        width: 80px;
-        padding: 5px;
-      }
-      h2 {
-        font-size: 1.14rem;
       }
     }
   </style>
 </head>
 <body>
-  <img src="https://static.wixstatic.com/media/c3283f_a3e1ec47496f42f7be617a2cd7a7bc9e~mv2.png"
-       class="logo"
-       alt="FlowChart Manager Logo" />
+  <div class="header-row">
+    <img src="https://static.wixstatic.com/media/c3283f_a3e1ec47496f42f7be617a2cd7a7bc9e~mv2.png"
+         class="logo"
+         alt="FlowChart Manager Logo" />
+    <img src="https://static.wixstatic.com/media/c3283f_a05997a9da8641329571e4e23f39aa84~mv2.png"
+         class="title-img"
+         alt="Socialeap Title" />
+  </div>
+
+  <img src="https://static.wixstatic.com/media/c3283f_1296419a0c4245bf9c13252ba7cfe6c8~mv2.png"
+       class="feature-card-img"
+       alt="Flowchart Feature Card" />
 
   <div class="glass-container" id="shareWidget">
     <h2>Share FlowChart Manager & Unlock <span style="color:#3383e6">FREE 💯 Access</span>!</h2>
-   <div 
-  class="a2a_kit a2a_kit_size_40 a2a_default_style"
-  data-a2a-url="https://www.socialeap.net/flowchart-landing"
-  data-a2a-title="Check out FlowChart Manager – Your AI Enhaced Tool for Next-Level Planning!"
-  data-a2a-body="I found this powerful, AI-assisted planning tool — FlowChart Manager — and thought you’d love it. See what it can do: https://www.socialeap.net/flowchart-landing"
->
-
+    <div 
+      class="a2a_kit a2a_kit_size_40 a2a_default_style"
+      data-a2a-url="https://www.socialeap.net/flowchart-landing"
+      data-a2a-title="Check out FlowChart Manager – Your AI Enhanced Tool for Next-Level Visual Planning!"
+      data-a2a-body="I found this powerful, AI-assisted planning tool—FlowChart Manager—and thought you’d love it. See what it can do: https://www.socialeap.net/flowchart-landing"
+    >
       <a class="a2a_button_facebook"></a>
       <a class="a2a_button_x"></a>
       <a class="a2a_button_linkedin"></a>
@@ -228,7 +272,6 @@
   </div>
 
   <script>
-    // Display the discount card immediately on ANY share button click
     function showDiscountCard() {
       document.getElementById('shareWidget').style.display = 'none';
       const card = document.getElementById('discountCard');
@@ -242,19 +285,16 @@
         });
       }
     }
-    // Add click listeners after AddToAny loads
     function addA2AClickListeners() {
       const shareBtns = document.querySelectorAll('.a2a_kit a');
       shareBtns.forEach(btn => {
         btn.addEventListener('click', showDiscountCard, { once: true });
       });
     }
-    // Add listeners after AddToAny initializes
     window.addEventListener('load', () => {
-      setTimeout(addA2AClickListeners, 900); // Delay to ensure buttons rendered
+      setTimeout(addA2AClickListeners, 900);
     });
 
-    // Copy access code logic
     const code = document.getElementById('accessCode');
     const btn = document.getElementById('copyBtn');
     const check = document.getElementById('successCheck');
