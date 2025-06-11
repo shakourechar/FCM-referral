@@ -39,7 +39,7 @@
       box-shadow: 0 4px 32px 0 rgba(40, 83, 159, 0.13);
       border-radius: 2.5rem;
       padding: 2.2rem 2rem 1.5rem 2rem;
-      max-width: 370px;
+      max-width: 390px;
       width: 95%;
       backdrop-filter: blur(18px) saturate(130%);
       -webkit-backdrop-filter: blur(18px) saturate(130%);
@@ -59,6 +59,7 @@
     .a2a_kit {
       margin: 1.5rem 0 1rem 0;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 18px;
     }
@@ -185,15 +186,20 @@
 
   <div class="glass-container" id="shareWidget">
     <h2>Share FlowChart Manager & Unlock <span style="color:#3383e6">FREE 💯 Access</span>!</h2>
-    <div class="a2a_kit a2a_kit_size_40 a2a_default_style"
-         data-a2a-url="https://www.socialeap.net?ref=BetaLaunch2025"
-         data-a2a-title="Unlock your free access to FlowChart Manager! Plan, visualize, and organize your ideas like a pro.">
+    <div 
+      class="a2a_kit a2a_kit_size_40 a2a_default_style"
+      data-a2a-url="https://www.socialeap.net?ref=BetaLaunch2025"
+      data-a2a-title="Check out FlowChart Manager – Next-Level Planning!"
+      data-a2a-body="I found this powerful, AI-assisted planning tool—FlowChart Manager—and thought you’d love it. See what it can do: https://www.socialeap.net?ref=BetaLaunch2025"
+    >
       <a class="a2a_button_facebook"></a>
       <a class="a2a_button_x"></a>
       <a class="a2a_button_linkedin"></a>
       <a class="a2a_button_whatsapp"></a>
       <a class="a2a_button_telegram"></a>
       <a class="a2a_button_email"></a>
+      <a class="a2a_button_reddit"></a>
+      <a class="a2a_button_copy_link"></a>
     </div>
     <div style="margin: 0.5em 0 0 0; font-size:0.95em; color:#5a78c9;">
       <span>Share with your network to claim your access code!</span>
@@ -221,31 +227,31 @@
   </div>
 
   <script>
-    // -- AddToAny referral link personalization (if you want to change dynamically) --
-    // let userId = localStorage.getItem('userId') || 'BetaLaunch2025';
-    // document.querySelector('.a2a_kit').setAttribute('data-a2a-url', `https://www.socialeap.net?ref=${userId}`);
-
-    // Detect share button click to show discount card
+    // Display the discount card immediately on ANY share button click
     function showDiscountCard() {
       document.getElementById('shareWidget').style.display = 'none';
       const card = document.getElementById('discountCard');
       card.style.display = 'block';
-      // Track with GA (optional)
+      // Google Analytics event
       if (typeof gtag === 'function') {
-        gtag('event', 'referral_share_complete', {
+        gtag('event', 'referral_share', {
           event_category: 'referral',
           event_label: 'user_shared',
           value: 1
         });
       }
     }
-
-    // AddToAny click detection (all share buttons)
-    window.a2a_config = window.a2a_config || {};
-    a2a_config.onclick = function(button_name, event) {
-      showDiscountCard();
-      return true; // proceed with default sharing
-    };
+    // Add click listeners after AddToAny loads
+    function addA2AClickListeners() {
+      const shareBtns = document.querySelectorAll('.a2a_kit a');
+      shareBtns.forEach(btn => {
+        btn.addEventListener('click', showDiscountCard, { once: true });
+      });
+    }
+    // Add listeners after AddToAny initializes
+    window.addEventListener('load', () => {
+      setTimeout(addA2AClickListeners, 900); // Delay to ensure buttons rendered
+    });
 
     // Copy access code logic
     const code = document.getElementById('accessCode');
@@ -253,11 +259,9 @@
     const check = document.getElementById('successCheck');
     function copyCodeToClipboard() {
       const codeStr = code.innerText.trim();
-      // Use Clipboard API
       if (navigator.clipboard) {
         navigator.clipboard.writeText(codeStr);
       } else {
-        // fallback for old browsers
         const tempInput = document.createElement("input");
         document.body.appendChild(tempInput);
         tempInput.value = codeStr;
@@ -265,7 +269,6 @@
         document.execCommand("copy");
         document.body.removeChild(tempInput);
       }
-      // Visual feedback
       code.classList.add("copied");
       check.style.display = "inline";
       setTimeout(() => {
@@ -275,11 +278,6 @@
     }
     code.addEventListener('click', copyCodeToClipboard);
     btn.addEventListener('click', copyCodeToClipboard);
-
-    // Optionally, pre-copy on page load if navigated with #copy
-    if(window.location.hash === "#copy") {
-      setTimeout(copyCodeToClipboard, 500);
-    }
   </script>
 </body>
 </html>
