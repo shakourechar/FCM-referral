@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FlowChart Manager: Share & Get Free Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- AddToAny -->
+  <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3QRXEDB06"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D3QRXEDB06');
+  </script>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #e3efff 0%, #cde7f2 100%);
+      font-family: 'Inter', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .logo {
+      margin: 2.5rem 0 1.5rem 0;
+      width: 110px;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.10));
+      border-radius: 2rem;
+      background: rgba(255,255,255,0.7);
+      padding: 8px;
+    }
+    .glass-container {
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.30);
+      box-shadow: 0 4px 32px 0 rgba(40, 83, 159, 0.13);
+      border-radius: 2.5rem;
+      padding: 2.2rem 2rem 1.5rem 2rem;
+      max-width: 370px;
+      width: 95%;
+      backdrop-filter: blur(18px) saturate(130%);
+      -webkit-backdrop-filter: blur(18px) saturate(130%);
+      border: 1.3px solid rgba(255,255,255,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      margin: 0 0 0.6rem 0;
+      font-weight: 700;
+      color: #2a4365;
+      font-size: 1.4rem;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .a2a_kit {
+      margin: 1.5rem 0 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+    .a2a_button {
+      transition: transform 0.16s;
+    }
+    .a2a_button:hover {
+      transform: scale(1.13);
+    }
+    #discountCard {
+      display: none;
+      margin-top: 1.7rem;
+      background: rgba(255,255,255,0.38);
+      border-radius: 1.7rem;
+      box-shadow: 0 4px 24px 0 rgba(50,100,200,0.09);
+      padding: 2rem 1.1rem 1.3rem 1.1rem;
+      width: 98%;
+      max-width: 350px;
+      text-align: center;
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      border: 1.2px solid rgba(255,255,255,0.32);
+      animation: popIn 0.6s cubic-bezier(.37,1.43,.41,1) 1;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.92);}
+      to   { opacity: 1; transform: scale(1);}
+    }
+    .code-instructions {
+      font-size: 1.1rem;
+      color: #3554a6;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+    .copy-code-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+      gap: 0.8em;
+    }
+    .discount-code {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #3050b0;
+      letter-spacing: 0.06em;
+      background: linear-gradient(90deg, #e3e8fd 0%, #e0fbfc 100%);
+      border-radius: 0.7em;
+      padding: 0.19em 0.8em;
+      cursor: pointer;
+      border: 1.4px dashed #95b4e2;
+      user-select: all;
+      transition: background 0.18s, color 0.18s;
+    }
+    .discount-code:active, .discount-code.copied {
+      background: linear-gradient(90deg, #badfff 0%, #c5e5f7 100%);
+      color: #2373b7;
+    }
+    .copy-btn {
+      background: #d9eafe;
+      border-radius: 50%;
+      border: none;
+      margin-left: 0.13em;
+      padding: 0.4em 0.47em;
+      cursor: pointer;
+      font-size: 1.15em;
+      color: #3886ec;
+      transition: background 0.17s;
+      box-shadow: 0 1px 5px rgba(100,110,190,0.09);
+      outline: none;
+      border: 1.1px solid #c2daf4;
+    }
+    .copy-btn:active {
+      background: #b2d3fc;
+      color: #1e5aa6;
+    }
+    .code-hint {
+      font-size: 0.92rem;
+      color: #4268b7;
+      margin-top: 0.1em;
+      margin-bottom: 0.6em;
+      letter-spacing: 0.02em;
+    }
+    .checkout-link {
+      color: #3b68ee;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.07em;
+      transition: color 0.18s;
+      word-break: break-all;
+    }
+    .checkout-link:hover {
+      color: #2e409c;
+      text-decoration: underline;
+    }
+    .success-check {
+      color: #38b000;
+      font-size: 1.23em;
+      margin-left: 0.25em;
+      vertical-align: middle;
+      display: none;
+    }
+    @media (max-width: 520px) {
+      .glass-container, #discountCard {
+        padding: 1.2rem 0.4rem 1.1rem 0.4rem;
+        max-width: 98vw;
+        border-radius: 1.05rem;
+      }
+      .logo {
+        width: 80px;
+        padding: 5px;
+      }
+      h2 {
+        font-size: 1.14rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img src="https://static.wixstatic.com/media/c3283f_a3e1ec47496f42f7be617a2cd7a7bc9e~mv2.png"
+       class="logo"
+       alt="FlowChart Manager Logo" />
+
+  <div class="glass-container" id="shareWidget">
+    <h2>Share FlowChart Manager & Unlock <span style="color:#3383e6">FREE 💯 Access</span>!</h2>
+    <div class="a2a_kit a2a_kit_size_40 a2a_default_style"
+         data-a2a-url="https://www.socialeap.net?ref=BetaLaunch2025"
+         data-a2a-title="Unlock your free access to FlowChart Manager! Plan, visualize, and organize your ideas like a pro.">
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_x"></a>
+      <a class="a2a_button_linkedin"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_email"></a>
+    </div>
+    <div style="margin: 0.5em 0 0 0; font-size:0.95em; color:#5a78c9;">
+      <span>Share with your network to claim your access code!</span>
+    </div>
+  </div>
+
+  <div id="discountCard">
+    <div class="code-instructions">🎉 Copy Your Free <span style="color:#19a25a;">💯</span> Access Code:</div>
+    <div class="copy-code-row">
+      <span class="discount-code" id="accessCode">BetaLaunch2025</span>
+      <button class="copy-btn" id="copyBtn" title="Copy code">
+        📋
+      </button>
+      <span class="success-check" id="successCheck">✔️</span>
+    </div>
+    <div class="code-hint">Click to copy &amp; use it at checkout.</div>
+    <div style="font-size:1.05em; margin-top:0.2em;">
+      Paste in&nbsp; 
+      <a class="checkout-link"
+         href="https://www.socialeap.net/flowchart-plan"
+         target="_blank" rel="noopener noreferrer">
+        Checkout Page
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // -- AddToAny referral link personalization (if you want to change dynamically) --
+    // let userId = localStorage.getItem('userId') || 'BetaLaunch2025';
+    // document.querySelector('.a2a_kit').setAttribute('data-a2a-url', `https://www.socialeap.net?ref=${userId}`);
+
+    // Detect share button click to show discount card
+    function showDiscountCard() {
+      document.getElementById('shareWidget').style.display = 'none';
+      const card = document.getElementById('discountCard');
+      card.style.display = 'block';
+      // Track with GA (optional)
+      if (typeof gtag === 'function') {
+        gtag('event', 'referral_share_complete', {
+          event_category: 'referral',
+          event_label: 'user_shared',
+          value: 1
+        });
+      }
+    }
+
+    // AddToAny click detection (all share buttons)
+    window.a2a_config = window.a2a_config || {};
+    a2a_config.onclick = function(button_name, event) {
+      showDiscountCard();
+      return true; // proceed with default sharing
+    };
+
+    // Copy access code logic
+    const code = document.getElementById('accessCode');
+    const btn = document.getElementById('copyBtn');
+    const check = document.getElementById('successCheck');
+    function copyCodeToClipboard() {
+      const codeStr = code.innerText.trim();
+      // Use Clipboard API
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(codeStr);
+      } else {
+        // fallback for old browsers
+        const tempInput = document.createElement("input");
+        document.body.appendChild(tempInput);
+        tempInput.value = codeStr;
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+      // Visual feedback
+      code.classList.add("copied");
+      check.style.display = "inline";
+      setTimeout(() => {
+        code.classList.remove("copied");
+        check.style.display = "none";
+      }, 1200);
+    }
+    code.addEventListener('click', copyCodeToClipboard);
+    btn.addEventListener('click', copyCodeToClipboard);
+
+    // Optionally, pre-copy on page load if navigated with #copy
+    if(window.location.hash === "#copy") {
+      setTimeout(copyCodeToClipboard, 500);
+    }
+  </script>
+</body>
+</html>
